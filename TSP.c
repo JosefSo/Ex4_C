@@ -59,7 +59,7 @@ void TSP(p_node head)
         best_path = -1;
     }  
 
-    printf("TSP shortest path: %d\n",best_path);
+    printf("TSP shortest path: %d \n",best_path);
 
     //free the memory
     free(arr);
