@@ -1,73 +1,70 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef GRAPH_
+#define GRAPH_
 
 #define INFINITY 100000
 
-typedef struct Edge *p_edge; //for struct Node
+typedef struct GRAPH_NODE_ *pnode; //for struct Node
 
 //**********************STRUCTURIES*********************//
 
+//-------Edge-------//
+typedef struct edge_ {
+    int weight;
+    pnode dest;
+    struct edge_ *next;
+} edge, *pedge;
 //-------Node-------//
-typedef struct Node {
+typedef struct GRAPH_NODE_ {
     int nodeId;
-    p_edge edges;
-    struct Node *next;
-} node, *p_node;
-
+    pedge edges;
+    struct GRAPH_NODE_ *next;
+} node, *pnode;
 //-------Dijkstra-------//
 typedef struct Dijkstra {
-    p_node node;
+    pnode node;
     int weight;
     int tag;
     struct Dijkstra *next;
 } dijkstra, *p_dijkstra;
 
-//-------Edge-------//
-typedef struct Edge {
-    int weight;
-    p_node dest;
-    struct Edge *next;
-} edge, *p_edge;
 
 
+
+void TSP(pnode head);
 
 //**********************GRPAH'S FUNCTIONS DECLARATION*********************//
-p_node createGraph(int nodes);
+pnode createGraph(int nodes);
 
-void addNode(p_node *head, int src);
+void addNode(pnode *head, int src);
 
-p_node getNode(int id, p_node *head);
+pnode getNode(int id, pnode *head);
 
-void addEdge(p_node temp, int dest, int w, p_node *head);
+void addEdge(pnode temp, int dest, int w, pnode *head);
 
-void addNode_B(p_node *head);
+void addNode_B(pnode *head);
 
-void freeEdges(p_node p);
+void freeEdges(pnode p);
 
-void deleteNode(p_node *head);
+void deleteNode(pnode *head);
 
-void deleteGraph(p_node *head);
+void freeGraph(pnode *head);
 
-void printGraph(p_node head);
+void freeEdge(pnode *head, int nodeId);
 
-void deleteEdge(p_node *head, int nodeId);
-
-void TSP(p_node head);
+void printGraph(pnode head);
 
 
 //**********************DIJKSTRA'S FUNCTIONS DECLARATION*********************//
-p_dijkstra createDijkstra(p_node start, int src);
+p_dijkstra createDijkstra(pnode start, int src);
 
 p_dijkstra getPointerDijkstra(p_dijkstra head, int id);
 
 void deleteDijkstra(p_dijkstra dijkstra);
 
-p_dijkstra minVertical(p_dijkstra head);
+p_dijkstra minimalH(p_dijkstra head);
 
-int shortestPath(p_node head, int src, int dest);
+int shortestPath(pnode head, int src, int dest);
 
 
-//**********************TSP'S FUNCTIONS DECLARATION*********************//
-void TSP(p_node head);
 
-#endif //GRAPH_H
+#endif //GRAPH_

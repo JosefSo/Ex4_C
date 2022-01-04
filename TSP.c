@@ -1,24 +1,18 @@
+#include "graph.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "graph.h"
+
 
 //*********function for solving TSP*********//
+void TSP(pnode head){
+	
+	
+    pnode graph = head;
+    int len = -1;
+    scanf("%d", &len);
 
-int weight;
-int arrlenth;
-p_node graph;
-
-
-void TSP(p_node head)
-{
-	weight = INFINITY;
-	arrlenth = -1;
-    graph = head;
-    scanf("%d", &arrlenth);
-
-    int *arr = (int *)(calloc(arrlenth, sizeof(int)));
-    for (int i = 0; i < arrlenth; i++)
-    {
+    int *arr = (int *)(calloc(len, sizeof(int)));
+    for (int i = 0; i < len; i++){
         scanf("%d", &arr[i]);
     }
     
@@ -28,11 +22,11 @@ void TSP(p_node head)
     int best_path, current_path;
     int existsPath, pathFound; //flags
     pathFound = 0;
-    best_path = 999999;
+    best_path = INFINITY;
 
-    for(j=1; j <= arrlenth; j++){
+    for(j=1; j <= len; j++){
 
-        for(i=0; i < arrlenth-1; i++){
+        for(i=0; i < len-1; i++){
 
             temp=arr[i];
             arr[i]=arr[i+1];
@@ -41,7 +35,7 @@ void TSP(p_node head)
             //one more loop that goes over all given nodes and finds shortest path between each node
             current_path = 0;
             existsPath = 1;
-            for(int node = 0; node<arrlenth-1;  node++){
+            for(int node = 0; node<len-1;  node++){
                 int dijk = shortestPath(graph, *(arr+node), *(arr+(node+1)));
                 if (dijk == -1)
                     existsPath = 0;

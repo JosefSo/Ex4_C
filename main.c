@@ -1,75 +1,55 @@
+#include "graph.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "graph.h"
 
-int main()
-{
-    p_node temp = NULL;
-    p_node *head = &temp;
-    char choise;
-    char ch;
-    int v = 0;
-    int src = 0;
-    while (scanf("%c", &choise) != EOF)
-    {
-        if (choise == 'A')
-        {
-            deleteGraph(head);
-            // printf("enter num of verticals:\n");
+
+int main(){
+    
+    int src, v = 0;
+    char choice, c;
+    pnode node_ = NULL;
+    pnode *head = &node_;
+
+    while (scanf("%c", &choice) != EOF){
+        if (choice == 'A'){
+            freeGraph(head);
+            
             scanf("%d", &v);
             *head = createGraph(v);
 
-            scanf("%c", &ch);
+            scanf("%c", &c);
 
-            while (scanf("%c", &ch) != 0)
-            {
-                if (ch == 'n')
-                {
+            while (scanf("%c", &c) != 0){
+                if (c == 'n'){
                     scanf("%d", &src);
                     addNode(head, src);
                 }
-                else
-                {
+                else{
                     break;
                 }
             }
-            // printGraph(*head);
-            choise = ch;
-
-            //printf("\nend A func\n");
+            choice = c;
         }
-        if (choise == 'B')
-        {
-            //printf("\nstart B FUNC\n");
+        if (choice == 'B'){
             addNode_B(head);
-            //printGraph(*head);
             continue;
         }
-        if (choise == 'D')
-        {
-            // printf("\nstart D FUNC\n");
+        if (choice == 'D'){
             deleteNode(head);
-            // printGraph(*head);
             continue;
         }
-        if (choise == 'S')
-        {
-            // printf("\nstart S FUNC\n");
+        if (choice == 'S'){
             int src = -1, dest = -1;
             scanf("%d %d", &src, &dest);
             int dis = shortestPath(*head, src, dest);
             printf("Dijsktra shortest path: %d \n", dis);
-            //printGraph(*head);
             continue;
         }
-        if (choise == 'T')
-        {
-            // printf("\nstart T FUNC\n");
+        if (choice == 'T'){
             TSP(*head);
-            // printGraph(*head);
             continue;
         }
     }
-    deleteGraph(head);
+    freeGraph(head);
 }
